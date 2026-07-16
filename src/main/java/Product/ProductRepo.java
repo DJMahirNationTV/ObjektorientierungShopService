@@ -17,6 +17,12 @@ public class ProductRepo {
 
         this.products.add(product);
     }
+    public Optional<Product> getProductById(String id) {
+        return products.stream()
+                .filter(p -> p.id().equals(id))
+                .findFirst();
+    }
+
     public List<Product> getProducts() {
         return products;
     }

@@ -18,11 +18,13 @@ public class ShopService {
         this.orderRepo = orderRepo;
     }
 
-    public void placeOrder(Order order) {
+    public void placeOrder(String orderId, List<String> productIds) {
         List<Product> products = new ArrayList<>();
 
         for (String productId : productIds) {
-            Optional<Product> productOpt = productRepo.getProducts(productId);
+            Optional<Product> productOpt = productRepo.getProductById(productId);
+
+
             if (productOpt.isPresent()) {
                 products.add(productOpt.get());
             } else {
@@ -31,7 +33,7 @@ public class ShopService {
             }
         }
 
-        Order newOrder = new Order(order.id(), products);
+        Order newOrder = new Order(orderId, products);
         orderRepo.addOrder(newOrder);
         System.out.println("Order has been added");
     }

@@ -1,23 +1,26 @@
 package Order;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class OrderListRepo implements OrderRepo {
-    private List<Order> orders;
+    private final List<Order> orders = new ArrayList<>();
 
     @Override
     public void addOrder(Order order) {
-        orders.add(order);
+        if (order != null) {
+            orders.add(order);
+        }
     }
 
     @Override
-    public void removeOrder(Order order) {
-        orders.removeIf(o -> o.equals(order));
+    public void removeOrder(String id) {
+        orders.removeIf(o -> o.id().equals(id));
     }
     @Override
     public List<Order> getOrders() {
-        return orders;
+        return new ArrayList<>(orders);
     }
     @Override
     public Optional<Order> getOrder(String id) {
