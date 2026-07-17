@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import Order.Order;
 import Order.OrderRepo;
+import Order.OrderStatus;
 import Product.Product;
 import Product.ProductRepo;
 
@@ -33,7 +34,7 @@ public class ShopService {
             }
         }
 
-        Order newOrder = new Order(orderId, products);
+        Order newOrder = new Order(orderId, products, OrderStatus.IN_PROGRESS);
         orderRepo.addOrder(newOrder);
         System.out.println("Order has been added");
     }
